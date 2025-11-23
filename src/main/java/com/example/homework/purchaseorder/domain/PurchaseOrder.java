@@ -2,12 +2,13 @@ package com.example.homework.purchaseorder.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Data
+@Getter
 @Entity
 @Table(name = "\"purchase_order\"", schema = "public")
 public class PurchaseOrder {
@@ -39,12 +40,15 @@ public class PurchaseOrder {
 
     protected PurchaseOrder() {}
 
-    private PurchaseOrder(BigDecimal amount){
+    private PurchaseOrder(UUID productId, UUID sellerId, UUID memberId, BigDecimal amount){
+        this.productId = productId;
+        this.sellerId = sellerId;
+        this.memberId = memberId;
         this.amount = amount;
     }
 
-    public static PurchaseOrder create(BigDecimal amount){
-        return new PurchaseOrder(amount);
+    public static PurchaseOrder create(UUID productId, UUID sellerId, UUID memberId, BigDecimal amount){
+        return new PurchaseOrder(productId, sellerId, memberId, amount);
     }
 
     public void markPaid() {

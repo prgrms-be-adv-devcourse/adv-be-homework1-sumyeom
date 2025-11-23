@@ -25,10 +25,12 @@ public class OrderService {
 
     @Transactional
     public ResponseEntity<OrderInfo> create(OrderCommand command) {
-        PurchaseOrder order = PurchaseOrder.create(command.amount());
-        order.setSellerId(UUID.randomUUID());
-        order.setMemberId(UUID.randomUUID());
-        order.setProductId(UUID.randomUUID());
+        PurchaseOrder order = PurchaseOrder.create(
+                command.productId(),
+                command.sellerId(),
+                command.memberId(),
+                command.amount()
+        );
         PurchaseOrder saved = orderRepository.save(order);
         OrderInfo response = OrderInfo.from(saved);
         return new ResponseEntity<>(HttpStatus.CREATED.value(),response,1);
