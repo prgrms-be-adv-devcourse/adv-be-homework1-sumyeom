@@ -1,4 +1,4 @@
-package com.example.homework.purchaseorder.entity;
+package com.example.homework.purchaseorder.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;

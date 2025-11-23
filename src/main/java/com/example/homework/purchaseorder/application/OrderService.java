@@ -1,11 +1,13 @@
-package com.example.homework.purchaseorder.service;
+package com.example.homework.purchaseorder.application;
 
 import com.example.homework.common.ResponseEntity;
-import com.example.homework.purchaseorder.dto.OrderInfo;
-import com.example.homework.purchaseorder.dto.OrderRequest;
-import com.example.homework.purchaseorder.entity.PurchaseOrder;
-import com.example.homework.purchaseorder.entity.PurchaseOrderStatus;
-import com.example.homework.purchaseorder.repository.OrderRepository;
+import com.example.homework.purchaseorder.application.dto.OrderCommand;
+import com.example.homework.purchaseorder.application.dto.OrderInfo;
+import com.example.homework.purchaseorder.domain.OrderRepository;
+import com.example.homework.purchaseorder.presentation.dto.OrderRequest;
+import com.example.homework.purchaseorder.domain.PurchaseOrder;
+import com.example.homework.purchaseorder.domain.PurchaseOrderStatus;
+import com.example.homework.purchaseorder.infrastructure.OrderJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,8 +24,8 @@ public class OrderService {
     private final OrderRepository orderRepository;
 
     @Transactional
-    public ResponseEntity<OrderInfo> create(OrderRequest request) {
-        PurchaseOrder order = PurchaseOrder.create(request.amount());
+    public ResponseEntity<OrderInfo> create(OrderCommand command) {
+        PurchaseOrder order = PurchaseOrder.create(command.amount());
         order.setSellerId(UUID.randomUUID());
         order.setMemberId(UUID.randomUUID());
         order.setProductId(UUID.randomUUID());

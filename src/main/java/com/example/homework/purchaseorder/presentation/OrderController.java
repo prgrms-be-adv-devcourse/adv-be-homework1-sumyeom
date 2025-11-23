@@ -1,13 +1,12 @@
-package com.example.homework.purchaseorder.controller;
+package com.example.homework.purchaseorder.presentation;
 
 import com.example.homework.common.ResponseEntity;
-import com.example.homework.purchaseorder.dto.OrderInfo;
-import com.example.homework.purchaseorder.dto.OrderRequest;
-import com.example.homework.purchaseorder.entity.PurchaseOrderStatus;
-import com.example.homework.purchaseorder.service.OrderService;
+import com.example.homework.purchaseorder.application.dto.OrderInfo;
+import com.example.homework.purchaseorder.presentation.dto.OrderRequest;
+import com.example.homework.purchaseorder.domain.PurchaseOrderStatus;
+import com.example.homework.purchaseorder.application.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +22,7 @@ public class OrderController {
     @Operation(summary = "주문 생성", description = "상품과 구매자 정보를 바탕으로 주문을 생성한다.")
     @PostMapping
     public ResponseEntity<OrderInfo> create(@RequestBody OrderRequest request) {
-        return orderService.create(request);
+        return orderService.create(request.toCommand());
     }
 
     @Operation(summary = "주문 목록 조회", description = "생성된 주문을 페이지 단위로 조회한다.")

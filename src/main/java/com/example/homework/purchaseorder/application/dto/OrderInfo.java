@@ -1,8 +1,7 @@
-package com.example.homework.purchaseorder.dto;
+package com.example.homework.purchaseorder.application.dto;
 
-import com.example.homework.purchaseorder.entity.PurchaseOrder;
-import com.example.homework.purchaseorder.entity.PurchaseOrderStatus;
-import jakarta.persistence.criteria.Order;
+import com.example.homework.purchaseorder.domain.PurchaseOrder;
+import com.example.homework.purchaseorder.domain.PurchaseOrderStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
