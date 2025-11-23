@@ -18,14 +18,17 @@
     const info = {};
     params.forEach((value, key) => info[key] = value);
     const payload = {
-        orderId: info.orderId,
-        paymentKey: info.paymentKey,
-        code: info.code,
-        message: info.message,
-        amount: info.amount ? Number(info.amount) : null,
-        rawPayload: JSON.stringify(info)
+        orderId: params.get('orderId'),
+        paymentKey: null,
+        errorCode: params.get('code'),
+        errorMessage: params.get('message'),
+        amount: 0,
+        rawPayload: JSON.stringify(Object.fromEntries(params))
     };
+
     document.getElementById('payload').textContent = JSON.stringify(payload, null, 2);
+
+
 
     async function notifyFailure() {
         try {
